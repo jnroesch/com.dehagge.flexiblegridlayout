@@ -1,0 +1,13 @@
+{
+  "name": "com.dehagge.flexiblegirdlayout",
+  "version": "0.1.0",
+  "displayName": "Flexible Grid Layout",
+  "description": "Package for UI Grid Layout Group",
+  "unity": "2019.4",
+  "author": {
+    "name": "DeHagge"
+  },
+  "gitDependencies": {
+    "com.dehagge.privatetestframework": "https://github.com/jnroesch/com.dehagge.privatetestframework.git#v0.1.0"
+  }
+}
