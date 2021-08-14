@@ -11,7 +11,8 @@ namespace Packages.com.dehagge.flexiblegridlayout.Runtime
             Width,
             Height,
             FixedRows,
-            FixedColumns
+            FixedColumns,
+            FixedGrid
         }
 
         public FitType fitType;
@@ -57,6 +58,9 @@ namespace Packages.com.dehagge.flexiblegridlayout.Runtime
 
             for(var i = 0; i < rectChildren.Count; i ++)
             {
+                //prevent divide by zero exceptions
+                if (columns == 0) return;
+                
                 var rowCount = i / columns;
                 var columnCount = i % columns;
 

@@ -46,6 +46,10 @@ namespace Packages.com.dehagge.flexiblegridlayout.Editor
                     break;
                 case FlexibleGridLayout.FitType.Height:
                     break;
+                case FlexibleGridLayout.FitType.FixedGrid:
+                    flexibleGridLayout.columns = EditorGUILayout.IntField("Columns", flexibleGridLayout.columns);
+                    flexibleGridLayout.rows = EditorGUILayout.IntField("Rows", flexibleGridLayout.rows);
+                    break;
                 default:
                     throw new ArgumentOutOfRangeException();
             }
