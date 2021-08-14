@@ -6,13 +6,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [1.0.0] - 2017-06-20
+## [0.2.0] - 2021-08-14
 ### Added
-- "Why keep a changelog?" section.
-- "Who needs a changelog?" section
-
-### Changed
-- Start using "changelog" over "change log" since it's the common usage.
-
-### Removed
-- Section about "changelog" vs "CHANGELOG".
+- Added fixed gridlayout where you can define fixed rows and columns
