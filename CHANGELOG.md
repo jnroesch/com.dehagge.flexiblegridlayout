@@ -9,3 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.2.0] - 2021-08-14
 ### Added
 - Added fixed gridlayout where you can define fixed rows and columns
+
+## [0.2.1] - 2021-08-14
+### Fixed
+- Fixed property serialization

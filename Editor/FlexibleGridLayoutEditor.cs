@@ -1,6 +1,7 @@
 ﻿using System;
 using Packages.com.dehagge.flexiblegridlayout.Runtime;
 using UnityEditor;
+using UnityEngine;
 
 namespace Packages.com.dehagge.flexiblegridlayout.Editor
 {
@@ -8,37 +9,52 @@ namespace Packages.com.dehagge.flexiblegridlayout.Editor
     public class FlexibleGridLayoutEditor : UnityEditor.Editor
     {
         private bool _paddingFoldout;
-        
+
+        private SerializedProperty _padding;
+        private SerializedProperty _spacing;
+        private SerializedProperty _fitType;
+        private SerializedProperty _columns;
+        private SerializedProperty _rows;
+
+        private void OnEnable()
+        {
+            _padding = serializedObject.FindProperty("m_Padding");
+            _spacing = serializedObject.FindProperty("spacing");
+            _fitType = serializedObject.FindProperty("fitType");
+            _columns = serializedObject.FindProperty("columns");
+            _rows = serializedObject.FindProperty("rows");
+        }
+
         public override void OnInspectorGUI()
         {
-            var flexibleGridLayout = target as FlexibleGridLayout;
-            
+            //do this first to make sure you have the latest version
+            serializedObject.Update();
+
             _paddingFoldout = EditorGUILayout.Foldout(_paddingFoldout, "Padding");
             if (_paddingFoldout)
             {
                 var indentLevel = EditorGUI.indentLevel;
                 EditorGUI.indentLevel++;
-                
-                flexibleGridLayout.padding.left = EditorGUILayout.IntField("Left", flexibleGridLayout.padding.left);
-                flexibleGridLayout.padding.right = EditorGUILayout.IntField("Right", flexibleGridLayout.padding.right);
-                flexibleGridLayout.padding.top = EditorGUILayout.IntField("Top", flexibleGridLayout.padding.top);
-                flexibleGridLayout.padding.bottom = EditorGUILayout.IntField("Bottom", flexibleGridLayout.padding.bottom);
-                
+
+                EditorGUILayout.PropertyField(_padding);
+
                 //reset indent level
                 EditorGUI.indentLevel = indentLevel;
             }
 
-            flexibleGridLayout.spacing = EditorGUILayout.Vector2Field("Spacing", flexibleGridLayout.spacing);
+            EditorGUILayout.PropertyField(_spacing);
+            EditorGUILayout.PropertyField(_fitType);
 
-            flexibleGridLayout.fitType = (FlexibleGridLayout.FitType)EditorGUILayout.EnumPopup("Fit Type", flexibleGridLayout.fitType);
+            var fitType =
+                (FlexibleGridLayout.FitType) Enum.GetValues(typeof(FlexibleGridLayout.FitType)).GetValue(_fitType.enumValueIndex);
 
-            switch (flexibleGridLayout.fitType)
+            switch (fitType)
             {
                 case FlexibleGridLayout.FitType.FixedColumns:
-                    flexibleGridLayout.columns = EditorGUILayout.IntField("Columns", flexibleGridLayout.columns);
+                    EditorGUILayout.PropertyField(_columns);
                     break;
                 case FlexibleGridLayout.FitType.FixedRows:
-                    flexibleGridLayout.rows = EditorGUILayout.IntField("Rows", flexibleGridLayout.rows);
+                    EditorGUILayout.PropertyField(_rows);
                     break;
                 case FlexibleGridLayout.FitType.Uniform:
                     break;
@@ -47,14 +63,14 @@ namespace Packages.com.dehagge.flexiblegridlayout.Editor
                 case FlexibleGridLayout.FitType.Height:
                     break;
                 case FlexibleGridLayout.FitType.FixedGrid:
-                    flexibleGridLayout.columns = EditorGUILayout.IntField("Columns", flexibleGridLayout.columns);
-                    flexibleGridLayout.rows = EditorGUILayout.IntField("Rows", flexibleGridLayout.rows);
+                    EditorGUILayout.PropertyField(_columns);
+                    EditorGUILayout.PropertyField(_rows);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
             }
 
-            flexibleGridLayout.CalculateLayoutInputVertical();
+            serializedObject.ApplyModifiedProperties();
         }
     }
 }
