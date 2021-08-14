@@ -30,18 +30,7 @@ namespace Packages.com.dehagge.flexiblegridlayout.Editor
             //do this first to make sure you have the latest version
             serializedObject.Update();
 
-            _paddingFoldout = EditorGUILayout.Foldout(_paddingFoldout, "Padding");
-            if (_paddingFoldout)
-            {
-                var indentLevel = EditorGUI.indentLevel;
-                EditorGUI.indentLevel++;
-
-                EditorGUILayout.PropertyField(_padding);
-
-                //reset indent level
-                EditorGUI.indentLevel = indentLevel;
-            }
-
+            EditorGUILayout.PropertyField(_padding);
             EditorGUILayout.PropertyField(_spacing);
             EditorGUILayout.PropertyField(_fitType);
 

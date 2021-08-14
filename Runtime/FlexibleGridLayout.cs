@@ -28,7 +28,7 @@ namespace Packages.com.dehagge.flexiblegridlayout.Runtime
         public override void CalculateLayoutInputVertical()
         {
             base.CalculateLayoutInputHorizontal();
-
+            
             if(fitType == FitType.Width || fitType == FitType.Height || fitType == FitType.Uniform)
             {
                 fitX = true;
@@ -53,8 +53,8 @@ namespace Packages.com.dehagge.flexiblegridlayout.Runtime
             var cellWidth = parentWidth / columns - spacing.x / columns * (columns - 1) - padding.left / (float)columns - padding.right / (float)columns;
             var cellHeight = parentHeight / rows - spacing.y / rows * (rows - 1) - padding.top / (float)rows - padding.bottom / (float)rows;
 
-            cellSize.x = fitX ? cellWidth : cellSize.x;
-            cellSize.y = fitY ? cellHeight : cellSize.y;
+            cellSize.x = cellWidth;// fitX ? cellWidth : cellSize.x;
+            cellSize.y = cellHeight;//fitY ? cellHeight : cellSize.y;
 
             for(var i = 0; i < rectChildren.Count; i ++)
             {
